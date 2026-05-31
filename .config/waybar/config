@@ -15,8 +15,8 @@
     "custom/playerctl",
     "bluetooth",
     "network",
-    "pulseaudio",
-    "battery"
+    "battery",
+    "pulseaudio"
   ],
   "sway/workspaces": {
     "disable-scroll": false,
