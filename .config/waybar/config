@@ -80,7 +80,7 @@
     ],
     "tooltip": false,
     "interval": 1600,
-    "exec": "/home/liam/.config/waybar/scripts/uptime.sh"
+    "exec": "~/.config/waybar/scripts/uptime.sh"
   },
   "backlight": {
     "format": "{icon}  {percent}%",
