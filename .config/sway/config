@@ -10,6 +10,7 @@ set $right l
 
 set $term alacritty
 set $menu rofi -show drun
+set $app_switcher rofi -show window
 set $clipmng alacritty --title launcher -o window.padding="{ x = 10, y = 10 }" -e fsel --cclip
 
 
@@ -39,11 +40,17 @@ bindgesture pinch:outward floating disable
 # Core
 bindsym $mod+Return        exec $term
 bindsym $mod+d             exec $menu
+bindsym $mod+Space         exec $app_switcher
 bindsym $mod+Shift+v       exec $clipmng
 bindsym $mod+Shift+q       kill
 bindsym $mod+Shift+c       reload
 bindsym $mod+Shift+e       exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
 bindsym $mod+p             exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+Alt+l         exec hyprlock 
+
+bindsym $mod+Control+Alt+l exec swaymsg "output * dpms off"
+bindsym $mod+Control+Alt+u exec swaymsg "output * dpms on"
+bindsym $mod+Control+Alt+o exec swaymsg "output * dpms off" && hyprlock
 
 floating_modifier $mod normal
 
@@ -98,7 +105,6 @@ bindsym $mod+w            layout tabbed
 bindsym $mod+e            layout toggle split
 bindsym $mod+f            fullscreen
 bindsym $mod+Shift+space  floating toggle
-bindsym $mod+space        focus mode_toggle
 bindsym $mod+a            focus parent
 
 # Scratchpad
