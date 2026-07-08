@@ -29,6 +29,11 @@ input type:touchpad {
 }
 
 
+bindgesture swipe:3:right workspace prev
+bindgesture swipe:3:left workspace next
+bindgesture pinch:inward floating enable
+bindgesture pinch:outward floating disable 
+
 ### Key bindings
 
 # Core
