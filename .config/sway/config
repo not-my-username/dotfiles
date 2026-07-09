@@ -161,4 +161,4 @@ for_window [title="^launcher$"] floating enable, resize set width 500 height 430
 
 
 include /etc/sway/config.d/*
-
+include ~/.config/sway/local_config/*
