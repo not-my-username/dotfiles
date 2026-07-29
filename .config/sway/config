@@ -2,8 +2,8 @@
 
 exec /usr/bin/lxqt-policykit-agent > /tmp/lxqt-agent.log 2>&1
 exec env RUST_BACKTRACE=1 RUST_LOG=swayr=warn swayrd > /tmp/swayrd.log 2>&1
-exec walker --gapplication-service
-exec elephant
+exec_always killall walker; walker --gapplication-service
+exec_always killall elephant; sleep 1 && elephant
 
 ### Variables
 
@@ -167,6 +167,8 @@ for_window [app_id=".*"]        border pixel 3
 for_window [app_id=".*popup"]   floating enable, resize set width 1920 height 1000
 for_window [title="^launcher$"] floating enable, resize set width 500 height 430, border none
 for_window [app_id="org.kde.kcalc"] floating enable
+for_window [app_id="dev.benz.walker"] border none
+for_window [app_id="dev.benz.walker"] floating enable 
 
 include /etc/sway/config.d/*
 include ~/.config/sway/local_config/*
