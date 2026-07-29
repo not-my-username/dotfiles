@@ -29,4 +29,3 @@ alias cl="clear && ls"
 alias cat="bat"
 
 export PATH=/home/liam/.local/bin/:$PATH
-

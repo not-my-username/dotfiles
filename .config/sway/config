@@ -1,5 +1,10 @@
 # sway config — ~/.config/sway/config
 
+exec /usr/bin/lxqt-policykit-agent > /tmp/lxqt-agent.log 2>&1
+exec env RUST_BACKTRACE=1 RUST_LOG=swayr=warn swayrd > /tmp/swayrd.log 2>&1
+exec walker --gapplication-service
+exec elephant
+
 ### Variables
 
 set $mod Mod4
@@ -9,10 +14,10 @@ set $up k
 set $right l
 
 set $term alacritty
-set $menu rofi -show drun
-set $app_switcher rofi -show window
-set $clipmng alacritty --title launcher -o window.padding="{ x = 10, y = 10 }" -e fsel --cclip
-
+set $menu walker
+set $app_switcher walker -m windows 
+set $clipmng walker -m clipboard
+set $sysmon alacritty --class 'btop-popup' -e btop 
 
 ### Output
 
@@ -42,6 +47,7 @@ bindsym $mod+Return        exec $term
 bindsym $mod+d             exec $menu
 bindsym $mod+Space         exec $app_switcher
 bindsym $mod+Shift+v       exec $clipmng
+bindsym $mod+Escape        exec $sysmon
 bindsym $mod+Shift+q       kill
 bindsym $mod+Shift+c       reload
 bindsym $mod+Shift+e       exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
@@ -51,6 +57,8 @@ bindsym $mod+Alt+l         exec hyprlock
 bindsym $mod+Control+Alt+l exec swaymsg "output * dpms off"
 bindsym $mod+Control+Alt+u exec swaymsg "output * dpms on"
 bindsym $mod+Control+Alt+o exec swaymsg "output * dpms off" && hyprlock
+
+bindsym $mod+Tab exec swayr switch-to-urgent-or-lru-window
 
 floating_modifier $mod normal
 
@@ -156,9 +164,9 @@ smart_gaps off
 corner_radius 10
 
 for_window [app_id=".*"]        border pixel 3
-for_window [app_id=".*popup"]   floating enable
+for_window [app_id=".*popup"]   floating enable, resize set width 1920 height 1000
 for_window [title="^launcher$"] floating enable, resize set width 500 height 430, border none
-
+for_window [app_id="org.kde.kcalc"] floating enable
 
 include /etc/sway/config.d/*
 include ~/.config/sway/local_config/*
