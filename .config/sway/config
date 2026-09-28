@@ -5,6 +5,8 @@ exec env RUST_BACKTRACE=1 RUST_LOG=swayr=warn swayrd > /tmp/swayrd.log 2>&1
 exec_always killall walker; walker --gapplication-service
 exec_always killall elephant; sleep 1 && elephant
 
+input * xkb_numlock enabled
+
 ### Variables
 
 set $mod Mod4
@@ -54,13 +56,14 @@ bindsym $mod+Shift+e       exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit
 bindsym $mod+p             exec grim -g "$(slurp)" - | wl-copy
 bindsym $mod+Alt+l         exec hyprlock 
 
-bindsym $mod+Control+Alt+l exec swaymsg "output * dpms off"
-bindsym $mod+Control+Alt+u exec swaymsg "output * dpms on"
+bindsym --locked $mod+Control+Alt+l exec swaymsg "output * dpms off"
+bindsym --locked $mod+Control+Alt+u exec swaymsg "output * dpms on"
 bindsym $mod+Control+Alt+o exec swaymsg "output * dpms off" && hyprlock
 
 bindsym $mod+Tab exec swayr switch-to-urgent-or-lru-window
 
 floating_modifier $mod normal
+mouse_warping container
 
 # Focus
 bindsym $mod+$left   focus left
@@ -94,6 +97,20 @@ bindsym $mod+8  workspace number 8
 bindsym $mod+9  workspace number 9
 bindsym $mod+0  workspace number 10
 
+bindsym $mod+KP_1  workspace number 1
+bindsym $mod+KP_2  workspace number 2
+bindsym $mod+KP_3  workspace number 3
+bindsym $mod+KP_4  workspace number 4
+bindsym $mod+KP_5  workspace number 5
+bindsym $mod+KP_6  workspace number 6
+bindsym $mod+KP_7  workspace number 7
+bindsym $mod+KP_8  workspace number 8
+bindsym $mod+KP_9  workspace number 9
+bindsym $mod+KP_0  workspace number 10
+
+bindsym $mod+Control+Left workspace prev
+bindsym $mod+Control+Right workspace next
+
 bindsym $mod+Shift+1  move container to workspace number 1
 bindsym $mod+Shift+2  move container to workspace number 2
 bindsym $mod+Shift+3  move container to workspace number 3
@@ -104,6 +121,17 @@ bindsym $mod+Shift+7  move container to workspace number 7
 bindsym $mod+Shift+8  move container to workspace number 8
 bindsym $mod+Shift+9  move container to workspace number 9
 bindsym $mod+Shift+0  move container to workspace number 10
+
+bindsym $mod+Shift+KP_1  move container to workspace number 1
+bindsym $mod+Shift+KP_2  move container to workspace number 2
+bindsym $mod+Shift+KP_3  move container to workspace number 3
+bindsym $mod+Shift+KP_4  move container to workspace number 4
+bindsym $mod+Shift+KP_5  move container to workspace number 5
+bindsym $mod+Shift+KP_6  move container to workspace number 6
+bindsym $mod+Shift+KP_7  move container to workspace number 7
+bindsym $mod+Shift+KP_8  move container to workspace number 8
+bindsym $mod+Shift+KP_9  move container to workspace number 9
+bindsym $mod+Shift+KP_0  move container to workspace number 10
 
 # Layout
 bindsym $mod+b            splith
@@ -160,6 +188,7 @@ bar {
 
 gaps outer 3
 gaps inner 8
+
 smart_gaps off
 corner_radius 10
 
