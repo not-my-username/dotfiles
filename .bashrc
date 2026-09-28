@@ -9,6 +9,12 @@ eval "$(starship init bash)"
 
 EDITOR='nvim'
 
+mkcd ()
+{
+    mkdir -p -- "$1" &&
+       cd -P -- "$1"
+}
+
 ## Setup Zoxide
 export PATH="~/.local/bin/:$PATH"
 eval "$(zoxide init bash)"
