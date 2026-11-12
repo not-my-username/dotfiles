@@ -34,4 +34,7 @@ alias cl="clear && ls"
 ## Setup bat alias
 alias cat="bat"
 
+alias sway="sway --unsupported-gpu"
+alias swconfig="nvim ~/.config/sway/config"
+
 export PATH=/home/liam/.local/bin/:$PATH

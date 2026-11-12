@@ -2,8 +2,8 @@
 
 exec /usr/bin/lxqt-policykit-agent > /tmp/lxqt-agent.log 2>&1
 exec env RUST_BACKTRACE=1 RUST_LOG=swayr=warn swayrd > /tmp/swayrd.log 2>&1
-exec_always killall walker; walker --gapplication-service
-exec_always killall elephant; sleep 1 && elephant
+exec walker --gapplication-service
+exec elephant
 
 input * xkb_numlock enabled
 
@@ -16,6 +16,7 @@ set $up k
 set $right l
 
 set $term alacritty
+set $file_mgnr dolphin
 set $menu walker
 set $app_switcher walker -m windows 
 set $clipmng walker -m clipboard
@@ -46,13 +47,15 @@ bindgesture pinch:outward floating disable
 
 # Core
 bindsym $mod+Return        exec $term
+bindsym $mod+Shift+d       exec $file_mgnr
 bindsym $mod+d             exec $menu
 bindsym $mod+Space         exec $app_switcher
 bindsym $mod+Shift+v       exec $clipmng
 bindsym $mod+Escape        exec $sysmon
 bindsym $mod+Shift+q       kill
 bindsym $mod+Shift+c       reload
-bindsym $mod+Shift+e       exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+Alt+BackSpace exec swaymsg exit
+
 bindsym $mod+p             exec grim -g "$(slurp)" - | wl-copy
 bindsym $mod+Alt+l         exec hyprlock 
 
