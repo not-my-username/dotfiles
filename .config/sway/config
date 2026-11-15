@@ -25,7 +25,6 @@ set $sysmon alacritty --class 'btop-popup' -e btop
 ### Output
 
 output * bg ~/.local/share/backgrounds/lakeside.jpg fill
-include ~/.config/sway-displays
 
 
 ### Input
@@ -63,7 +62,8 @@ bindsym --locked $mod+Control+Alt+l exec swaymsg "output * dpms off"
 bindsym --locked $mod+Control+Alt+u exec swaymsg "output * dpms on"
 bindsym $mod+Control+Alt+o exec swaymsg "output * dpms off" && hyprlock
 
-bindsym $mod+Tab exec swayr switch-to-urgent-or-lru-window
+bindsym $mod+Tab exec swayr prev-window all-workspaces
+bindsym $mod+KP_Decimal exec swaymsg [app_id="zen"] focus && wtype -M ctrl t
 
 floating_modifier $mod normal
 mouse_warping container
